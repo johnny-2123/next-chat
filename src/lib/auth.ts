@@ -20,9 +20,9 @@ function getGoogleCredentials() {
 
 export const authOptions: NextAuthOptions = {
   adapter: UpstashRedisAdapter(db),
-  session: {
-    strategy: "jwt",
-  },
+  // session: {
+  //   strategy: "jwt",
+  // },
   pages: {
     signIn: "/login",
   },
@@ -48,12 +48,12 @@ export const authOptions: NextAuthOptions = {
       };
     },
 
-    async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id;
-        session.user.name = token.name;
-        session.user.email = token.email;
-        session.user.image = token.picture;
+    async session({ session, token, user }) {
+      if (user) {
+        session.user.id = user.id;
+        session.user.name = user.name;
+        session.user.email = user.email;
+        session.user.image = user.image;
       }
       return session;
     },
