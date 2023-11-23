@@ -26,6 +26,8 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
 
   const addFriend = async (email: string) => {
     try {
+      setError("email", { message: "" });
+      setError("root", { message: "" });
       const validatedEmail = addFriendValidator.parse({ email });
 
       await axios.post("/api/friends/add", {
